@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Todos.Domain.Todos;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -24,6 +26,8 @@ namespace Todos.EntityFrameworkCore
         ITenantManagementDbContext
     {
         /* Add DbSet properties for your Aggregate Roots / Entities here. */
+
+        public DbSet<Todo> Todos { get; set; }
         
         #region Entities from the modules
         
@@ -81,6 +85,15 @@ namespace Todos.EntityFrameworkCore
             //    b.ConfigureByConvention(); //auto configure for the base class props
             //    //...
             //});
+
+            builder.Entity<Todo>(b =>
+            {
+                b.ToTable(TodosConsts.DbTablePrefix + "Todos", TodosConsts.DbSchema);
+                b.ConfigureByConvention();
+            
+                //b.Property(x => x.Name).IsRequired().HasMaxLength(TodoConsts.MaxNameLength);
+                // b.HasIndex(x => x.Name);
+            });
         }
     }
 }

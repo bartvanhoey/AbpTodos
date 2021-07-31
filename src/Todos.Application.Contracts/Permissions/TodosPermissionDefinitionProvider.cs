@@ -8,10 +8,12 @@ namespace Todos.Permissions
     {
         public override void Define(IPermissionDefinitionContext context)
         {
-            var myGroup = context.AddGroup(TodosPermissions.GroupName);
+            var todosGroup = context.AddGroup(TodosPermissions.TodosGroup, L("Permission:TodosGroup"));
 
-            //Define your own permissions here. Example:
-            //myGroup.AddPermission(TodosPermissions.MyPermission1, L("Permission:MyPermission1"));
+            var todosPermission = todosGroup.AddPermission(TodosPermissions.Todos.Default, L("Permission:Todos"));
+            todosPermission.AddChild(TodosPermissions.Todos.Create, L("Permission:Todos:Create"));
+            todosPermission.AddChild(TodosPermissions.Todos.Update, L("Permission:Todos:Update"));
+            todosPermission.AddChild(TodosPermissions.Todos.Delete, L("Permission:Todos:Delete"));
         }
 
         private static LocalizableString L(string name)

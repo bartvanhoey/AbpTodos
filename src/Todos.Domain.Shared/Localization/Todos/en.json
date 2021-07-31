@@ -3,6 +3,11 @@
   "texts": {
     "Menu:Home": "Home",
     "Welcome": "Welcome",
-    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io."
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
+    "Permission:TodosGroup": "Todos",
+    "Permission:Todos": "Todos Management",
+    "Permission:Todos:Create": "Creating todos",
+    "Permission:Todos:Update": "Editing todos",
+    "Permission:Todos:Delete": "Deleting todos"
   }
 }

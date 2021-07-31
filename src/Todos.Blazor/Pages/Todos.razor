@@ -1,0 +1,37 @@
+@page "/todos"
+@inherits TodosComponentBase
+
+<div class="container">
+    <Card>
+        <CardHeader>
+            <CardTitle>
+                TODO LIST
+            </CardTitle>
+        </CardHeader>
+        <CardBody>
+            <!-- FORM FOR NEW TODO ITEMS -->
+            <form id="NewItemForm" 
+                  @onsubmit:preventDefault
+                  @onsubmit="() => CreateAsync()"
+                  class="form-inline">
+                <input type="text" 
+                       @bind-value="@NewTodoText"
+                       class="form-control mr-2" 
+                       placeholder="enter text...">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <!-- TODO ITEMS LIST -->
+            <ul id="TodoList">
+                @foreach (var todoDto in TodoItems)
+                {
+                    <li data-id="@todoDto.Id">
+                        <i class="far fa-trash-alt"
+                           @onclick="() => DeleteAsync(todoDto)"
+                           ></i> @todoDto.Content
+                    </li>
+                }
+            </ul>
+        </CardBody>
+    </Card>
+</div>
